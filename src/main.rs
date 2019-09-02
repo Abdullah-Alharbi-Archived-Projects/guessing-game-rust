@@ -77,7 +77,7 @@ fn word() {
 
     // 2. select 2 or 1 char to show from the selected word
     let selcted_chars = rand::thread_rng().gen_range(1, 3);
-    let mut chars: [usize; 2] = [0, 0];
+    let mut chars: [usize; 2] = [1, 1];
 
     for i in 0..selcted_chars {
         chars[i] = rand::thread_rng().gen_range(1, selected_word.len())
