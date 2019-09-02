@@ -60,5 +60,54 @@ fn number() {
 }
 
 fn word() {
-    println!("not implemented yet.");
+    let words = ["rust", "world"];
+    let prefix = "_"; // r___ prefix between word or _us_
+
+    // 1. generate random index
+    let words_len = words.len();
+    let index = rand::thread_rng().gen_range(0, words_len);
+
+    let selected_word = words[index];
+
+    // 2. select 2 or 1 char to show from the selected word
+    let mut chars: [usize; 2] = [1, 2];
+
+    for i in 0..2 {
+        chars[i] = rand::thread_rng().gen_range(1, selected_word.len())
+    }
+
+    // generate the hidden word
+
+    let mut secret_word = String::from("");
+    let selected_word_len = selected_word.len() - 1;
+
+    for (i, c) in selected_word.chars().enumerate() {
+        if i == chars[0] || i == chars[1] {
+            let selected_char = c.to_string();
+            secret_word.push_str(&selected_char);
+        } else {
+            secret_word.push_str(&prefix);
+        }
+
+        if i == selected_word_len {
+            break;
+        }
+    }
+
+    println!("Hidden word: {}, {}", secret_word, secret_word.len());
+
+    loop {
+        let mut word = String::new();
+        io::stdin()
+            .read_line(&mut word)
+            .expect("Failed to read line");
+
+        if word.trim() == selected_word {
+            println!("You win!");
+            break;
+        } else {
+            println!("Try again.");
+            continue;
+        }
+    }
 }
