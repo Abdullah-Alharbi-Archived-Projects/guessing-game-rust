@@ -60,7 +60,10 @@ fn number() {
 }
 
 fn word() {
-    let words = ["rust", "world"];
+    println!("Guess the word started ...");
+    let words = [
+        "world", "movie", "discord", "youtube", "twitter", "facebook",
+    ];
     let prefix = "_"; // r___ prefix between word or _us_
 
     // 1. generate random index
@@ -70,9 +73,10 @@ fn word() {
     let selected_word = words[index];
 
     // 2. select 2 or 1 char to show from the selected word
+    let selcted_chars = rand::thread_rng().gen_range(1, 3);
     let mut chars: [usize; 2] = [1, 2];
 
-    for i in 0..2 {
+    for i in 0..selcted_chars {
         chars[i] = rand::thread_rng().gen_range(1, selected_word.len())
     }
 
